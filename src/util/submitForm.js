@@ -1,5 +1,7 @@
-export const submitForm = async (data) => {
-  console.log(data);
+export const submitForm = async (data, mode) => {
+  console.log(mode);
+  // mode = deposit, withdraw
+
   //data = {
   //   email: email,
   //   amount: amount,

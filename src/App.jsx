@@ -59,11 +59,10 @@ function App() {
     }
 
     setError(errors);
-
     if (errors.length == 0) {
       setIsLoading(true);
-      const url = await submitForm(data);
-      window.location.href = url;
+      const url = await submitForm(data, mode ? mode : "deposit");
+      // window.location.href = url;
     }
   };
 
