@@ -1,21 +1,58 @@
-import Select from "react-select";
-import LabelForInput from "./LabelForInput";
-import { Btc } from "./Icons";
+import { useState } from "react";
+import CryptoItem from "./CryptoItem";
 
 export default function CryptoSelect({ changeCrypto }) {
-  const options = [
-    { value: "usdt", label: <LabelForInput icon={<Btc />} label="USDT" /> },
-    { value: "dash", label: <LabelForInput icon={<Btc />} label="Dash" /> },
-    { value: "btc", label: <LabelForInput icon={<Btc />} label="BTC" /> },
-    { value: "bnb", label: <LabelForInput icon={<Btc />} label="BNB" /> },
-    { value: "eth", label: <LabelForInput icon={<Btc />} label="ETH" /> },
-    { value: "ton", label: <LabelForInput icon={<Btc />} label="TON" /> },
-  ];
+  const [activeCrypto, setActiveCrypto] = useState();
+
+  const updateCrypto = (crypto) => {
+    setActiveCrypto(crypto);
+    changeCrypto(crypto);
+  };
+
   return (
-    <Select
-      options={options}
-      placeholder="Select crypto"
-      onChange={(e) => changeCrypto(e.value)}
-    />
+    <div className="flex flex-col w-full gap-2 p-[4px]">
+      <CryptoItem
+        icon="/usdt.webp"
+        active={activeCrypto == "usdt"}
+        onClick={() => updateCrypto("usdt")}
+      >
+        USDT
+      </CryptoItem>
+      <CryptoItem
+        icon="/dash.webp"
+        active={activeCrypto == "dash"}
+        onClick={() => updateCrypto("dash")}
+      >
+        Dash
+      </CryptoItem>
+      <CryptoItem
+        icon="/btc.webp"
+        active={activeCrypto == "btc"}
+        onClick={() => updateCrypto("btc")}
+      >
+        BTC
+      </CryptoItem>
+      <CryptoItem
+        icon="/bnb.webp"
+        active={activeCrypto == "bnb"}
+        onClick={() => updateCrypto("bnb")}
+      >
+        BNB
+      </CryptoItem>
+      <CryptoItem
+        icon="/eth.webp"
+        active={activeCrypto == "eth"}
+        onClick={() => updateCrypto("eth")}
+      >
+        ETH
+      </CryptoItem>
+      <CryptoItem
+        icon="/ton.webp"
+        active={activeCrypto == "ton"}
+        onClick={() => updateCrypto("ton")}
+      >
+        TON
+      </CryptoItem>
+    </div>
   );
 }
