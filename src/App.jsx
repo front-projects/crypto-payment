@@ -17,13 +17,16 @@ function App() {
   const [error, setError] = useState([]);
   const [mode, setMode] = useState("deposit");
   const [balance, setBalance] = useState();
+  const [id, setId] = useState();
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const modeParam = queryParams.get("mode");
+    const idParam = queryParams.get("data");
     const balanceParam = queryParams.get("balance");
     setBalance(balanceParam);
     setMode(modeParam);
+    setId(idParam);
   }, []);
   const submittingForm = async (e) => {
     e.preventDefault();
@@ -61,7 +64,7 @@ function App() {
     setError(errors);
     if (errors.length == 0) {
       setIsLoading(true);
-      const url = await submitForm(data, mode ? mode : "deposit");
+      const url = await submitForm(data, mode ? mode : "deposit", id);
       window.location.href = url;
     }
   };
@@ -93,6 +96,13 @@ function App() {
           onSubmit={submittingForm}
         >
           <div className="w-full flex flex-col gap-2 mb-20">
+            <div className="font-semibold text-xl text-center border-b-2 p-2 mb-4">
+              Pay via preferable crypto
+              <div className="text-sm text-[#9c27b0]">
+                ~from whale project devs~
+              </div>
+            </div>
+
             <h3
               className={`font-semibold p-1 ${error.includes("email") ? "text-red-600" : "text-gray-700 "}`}
             >
