@@ -96,6 +96,13 @@ function App() {
           onSubmit={submittingForm}
         >
           <div className="w-full flex flex-col gap-2 mb-20">
+            <div className="w-full text-center font-semibold text-xl bg-[#9c27b0] rounded-md py-2 text-white">
+              {mode == "withdraw" ? (
+                <div>MONEY WITHDRAW</div>
+              ) : (
+                <div>MONEY DEPOSIT</div>
+              )}
+            </div>
             <div className="font-semibold text-xl text-center border-b-2 p-2 mb-4">
               Pay via preferable crypto
               <div className="text-sm text-[#9c27b0]">
