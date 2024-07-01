@@ -26,6 +26,7 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
+    WebApp.ready();
     WebApp.BackButton.show();
     const queryParams = new URLSearchParams(window.location.search);
     const modeParam = queryParams.get("mode");
