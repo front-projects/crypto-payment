@@ -7,6 +7,7 @@ import { purple } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
 import { InputElement } from "./components/CustomInput";
 import { IoIosCloseCircle } from "react-icons/io";
+import WebApp from "@twa-dev/sdk";
 
 import { IoIosCheckmarkCircle } from "react-icons/io";
 
@@ -25,6 +26,7 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
+    WebApp.BackButton.show();
     const queryParams = new URLSearchParams(window.location.search);
     const modeParam = queryParams.get("mode");
     const idParam = queryParams.get("data");
@@ -58,8 +60,8 @@ function App() {
           login: id,
           email: email,
           transactionAmount: amount,
-          currencyCode: crypto.toUpperCase(),
-          adress: adress,
+          currency: crypto.toUpperCase(),
+          cryptoAddress: adress,
           description: description,
         });
 
@@ -68,7 +70,7 @@ function App() {
     if (!email || email.trim() === "") {
       errors.push("email");
     }
-    if (!amount || amount <= 0) {
+    if ((!amount || amount <= 0) && mode == "withdraw") {
       errors.push("amount");
     }
     if (!crypto) {
@@ -165,22 +167,23 @@ function App() {
                   Select a crypto
                 </h3>
                 <CryptoSelect changeCrypto={(crypto) => setCrypto(crypto)} />
-                <h3
-                  className={`font-semibold p-1 ${error.includes("amount") ? "text-red-600" : "text-gray-700 "}`}
-                >
-                  Enter an amount
-                </h3>
-                <InputElement
-                  required
-                  type="number"
-                  max={balance ? balance : 9999}
-                  step="0.0001"
-                  min={0}
-                  placeholder="Amount"
-                  onChange={(e) => setAmount(e.target.value)}
-                />
+
                 {mode == "withdraw" && (
                   <>
+                    <h3
+                      className={`font-semibold p-1 ${error.includes("amount") ? "text-red-600" : "text-gray-700 "}`}
+                    >
+                      Enter an amount
+                    </h3>
+                    <InputElement
+                      required
+                      type="number"
+                      max={balance ? balance : 9999}
+                      step="0.0001"
+                      min={0}
+                      placeholder="Amount"
+                      onChange={(e) => setAmount(e.target.value)}
+                    />
                     <h3
                       className={`font-semibold p-1 ${error.includes("adress") ? "text-red-600" : "text-gray-700 "}`}
                     >

@@ -1,8 +1,6 @@
 import { API_URL } from "./config.js";
 
 export const submitForm = async (data, mode, tgid) => {
-  console.log(mode);
-  console.log(data);
   // mode !== "withdraw"
   //   ? (data = {
   //     login: id,
@@ -20,12 +18,13 @@ export const submitForm = async (data, mode, tgid) => {
   //   });
 
   if (mode === "withdraw") {
-    console.log(API_URL + "/withdraws/" + tgid);
+    console.log(API_URL + "/withdraws -- " + tgid);
+    console.log(data);
     try {
-      const response = await fetch(API_URL + "/withdraws/" + tgid, {
+      const response = await fetch(API_URL + "/withdraws", {
         method: "POST",
         headers: {
-          // Authorization: `Bearer ${TOKEN}`,
+          Authorization: `Bearer ${tgid}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),

@@ -13,8 +13,8 @@ export default function CryptoSelect({ changeCrypto }) {
     <div className="flex flex-col w-full gap-2 p-[4px]">
       <CryptoItem
         icon="/usdt.webp"
-        active={activeCrypto == "usdt"}
-        onClick={() => updateCrypto("usdt")}
+        active={activeCrypto == "usdttrc"}
+        onClick={() => updateCrypto("usdttrc")}
       >
         USDT
       </CryptoItem>
@@ -34,8 +34,8 @@ export default function CryptoSelect({ changeCrypto }) {
       </CryptoItem>
       <CryptoItem
         icon="/bnb.webp"
-        active={activeCrypto == "bnb"}
-        onClick={() => updateCrypto("bnb")}
+        active={activeCrypto == "bnb20"}
+        onClick={() => updateCrypto("bnb20")}
       >
         BNB
       </CryptoItem>
