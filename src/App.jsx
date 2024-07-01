@@ -26,8 +26,15 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    WebApp.ready();
-    WebApp.BackButton.show();
+    if (WebApp.BackButton) {
+      console.log("BackButton знайдено");
+      WebApp.BackButton.show();
+      WebApp.BackButton.onClick(() => {
+        console.log("Назад натиснуто");
+      });
+    } else {
+      alert("hi");
+    }
     const queryParams = new URLSearchParams(window.location.search);
     const modeParam = queryParams.get("mode");
     const idParam = queryParams.get("data");
